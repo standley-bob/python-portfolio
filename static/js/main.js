@@ -1,3 +1,26 @@
+(function rotateHeroSig() {
+  const block = document.querySelector("#hero-sig code");
+  const bank = document.querySelector("#hero-sigs");
+  if (!block || !bank) return;
+  let list = [];
+  try {
+    list = JSON.parse(bank.textContent || "[]");
+  } catch {
+    return;
+  }
+  if (!list.length) return;
+  const current = block.textContent;
+  let next = list[Math.floor(Math.random() * list.length)];
+  if (list.length > 1) {
+    let guard = 0;
+    while (next === current && guard < 8) {
+      next = list[Math.floor(Math.random() * list.length)];
+      guard += 1;
+    }
+  }
+  block.textContent = next;
+})();
+
 document.querySelectorAll('a[href^="#"]').forEach((link) => {
   link.addEventListener("click", (event) => {
     const id = link.getAttribute("href");

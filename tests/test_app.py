@@ -8,6 +8,8 @@ def test_home_ok():
     assert response.status_code == 200
     assert b"Selected software" in response.data
     assert b"Standley David" in response.data
+    assert b"hero-sig" in response.data
+    assert b"hero-sigs" in response.data
     assert b"stunningstanley@gmail.com" in response.data
     assert b"https://github.com/standley-bob" in response.data
     assert b"https://www.linkedin.com/in/standley-david-/" in response.data

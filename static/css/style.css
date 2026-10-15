@@ -94,8 +94,37 @@ nav {
   font-family: var(--mono);
   font-size: 0.78rem;
 }
-nav a { color: var(--muted); text-decoration: none; }
-nav a:hover { color: var(--white); }
+nav a, nav summary { color: var(--muted); text-decoration: none; }
+nav a:hover, nav summary:hover { color: var(--white); }
+nav summary {
+  list-style: none;
+  cursor: pointer;
+  font: inherit;
+}
+nav summary::-webkit-details-marker { display: none; }
+.nav-drop { position: relative; }
+.nav-drop-panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.7rem);
+  min-width: 16rem;
+  padding: 0.45rem;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  display: grid;
+  gap: 0.15rem;
+  z-index: 5;
+}
+.nav-drop-panel a {
+  padding: 0.5rem 0.65rem;
+  color: var(--ink);
+}
+.nav-drop-panel a:hover {
+  background: color-mix(in srgb, var(--violet) 22%, transparent);
+  color: var(--white);
+  text-decoration: none;
+}
 .ghost { opacity: 0.7; }
 
 .hero, .band, .split, .detail { padding: 4.5rem 6vw; }
@@ -149,6 +178,10 @@ h3 { margin: 0 0 0.4rem; font-size: 1.45rem; }
   color: #e4dbff;
   font-family: var(--mono);
   font-size: 0.82rem;
+}
+.hero .sig {
+  min-height: 9.6rem;
+  white-space: pre-wrap;
 }
 .sig-line { color: var(--muted); margin-top: 0.9rem; }
 

@@ -10,12 +10,8 @@
     <a class="btn" href="#work">See the work</a>
     <a class="btn btn-quiet" href="#contact">Say hello</a>
   </div>
-  <pre class="sig" aria-hidden="true"><code>from coffee import one_more
-
-def build(idea: str) -> Software:
-    while idea.count("bug") > idea.count("test"):
-        one_more()
-    return Software(shipped=True)  # it ran once. ship it.</code></pre>
+  <pre class="sig" id="hero-sig" aria-hidden="true"><code>{{ hero_sig }}</code></pre>
+  <script type="application/json" id="hero-sigs">{{ hero_snippets | tojson }}</script>
 </section>
 
 <section id="work" class="band">

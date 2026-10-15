@@ -31,4 +31,65 @@ SOCIALS = [
     {"label": "GitHub", "icon": "github", "href": "https://github.com/standley-bob"},
     {"label": "LinkedIn", "icon": "linkedin", "href": "https://www.linkedin.com/in/standley-david-/"},
 ]
+
+HERO_SNIPPETS = [
+    """from coffee import one_more
+
+def build(idea: str) -> Software:
+    while idea.count("bug") > idea.count("test"):
+        one_more()
+    return Software(shipped=True)  # it ran once. ship it.""",
+    """from meetings import this_could_have_been_an_email
+
+def standup(status: str) -> None:
+    if "blocked" in status:
+        status = "synergizing"
+    print(status)  # nobody heard it anyway""",
+    """try:
+    sleep(8 * 60 * 60)
+except Production:
+    print("I am a teapot. Also awake.")
+finally:
+    coffee += 1""",
+    """def estimate(hours: int) -> str:
+    return f"{hours * 3} hours, plus a snack, plus denial"
+
+# PM heard: "two hours\"""",
+    """if production.fine:
+    don't.touch()
+else:
+    git.commit("-m", "hotfix")
+    git.commit("-m", "hotfix for the hotfix")""",
+    """from stackoverflow import paste
+
+def intern_to_senior():
+    paste()
+    return "LGTM"  # I did not read it""",
+    """import this
+del this  # I needed the namespace for bugs
+
+while True:
+    print("I'll start after this snack")""",
+    """def friday() -> Release:
+    tests = run_tests()
+    return Release(shipped=True)  # tests were a suggestion""",
+    """user.clicked("Submit")
+for _ in range(4):
+    user.clicked("Submit")
+# we debounce in production. this is local.""",
+    """from imposter import syndrome
+
+def code_review(me: Human) -> str:
+    if syndrome:
+        return "looks good, I guess I got lucky"
+    return "looks good, I guess I got lucky\"""",
+    """inbox = Downloads()
+inbox.sort()  # lol no
+organizer.apply(inbox)
+# the desktop is still a crime scene""",
+    """def ai_help(prompt: str) -> str:
+    return prompt.replace("please", "please work")
+
+raise ItWorksOnMyMachineError("shipped")""",
+]
 # Drop your own mark over static/img/logo.svg when you have it.

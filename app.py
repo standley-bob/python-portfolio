@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import logging
+import random
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -9,7 +10,7 @@ from dotenv import load_dotenv
 from flask import Flask, abort, jsonify, redirect, render_template, request, url_for
 
 from data.projects import all_projects, get_project
-from data.site import ABOUT, EMAIL, HANDLE, INTRO, LOCATION, NAME, ROLE, SKILLS, SOCIALS, TAGLINE
+from data.site import ABOUT, EMAIL, HANDLE, HERO_SNIPPETS, INTRO, LOCATION, NAME, ROLE, SKILLS, SOCIALS, TAGLINE
 from mailer import MailNotConfigured, mail_ready, send_contact
 from software.ats_resume_builder.web import bp as ats_bp
 from software.job_application_tracker.web import bp as jobs_bp
@@ -47,6 +48,8 @@ def context(**extra):
         "skills": SKILLS,
         "socials": SOCIALS,
         "projects": all_projects(),
+        "hero_snippets": HERO_SNIPPETS,
+        "hero_sig": random.choice(HERO_SNIPPETS),
         "year": datetime.now(timezone.utc).year,
     }
     payload.update(extra)
