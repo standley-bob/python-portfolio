@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% from "_icons.html" import svg %}
+{% block content %}
+<section class="hero">
+  <p class="kicker">{{ location }} · {{ role }}</p>
+  <h1>{{ name }}</h1>
+  <p class="lede">{{ tagline }}</p>
+  <p class="intro">{{ intro }}</p>
+  <div class="row">
+    <a class="btn" href="#work">See the work</a>
+    <a class="btn btn-quiet" href="#contact">Say hello</a>
+  </div>
+  <pre class="sig" aria-hidden="true"><code>from coffee import one_more
+
+def build(idea: str) -> Software:
+    while idea.count("bug") > idea.count("test"):
+        one_more()
+    return Software(shipped=True)  # it ran once. ship it.</code></pre>
+</section>
+
+<section id="work" class="band">
+  <div class="band-head">
+    <h2>Selected software</h2>
+    <p>Three live Python tools. Open an app, or read the write-up. Each one is a separate package, ready to live in its own GitHub repo.</p>
+  </div>
+  <div class="grid">
+    {% for project in projects %}
+    <article class="card">
+      <div class="card-meta">
+        <span class="status">{{ project.status }}</span>
+        <span>{{ project.year }}</span>
+      </div>
+      <h3>{{ project.title }}</h3>
+      <p>{{ project.blurb }}</p>
+      <p class="sig-line mono">{{ project.signature }}</p>
+      <ul class="tags">
+        {% for item in project.stack %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+      <div class="card-actions">
+        <a class="btn" href="{{ url_for(project.demo) }}">Open app</a>
+        <a class="btn btn-quiet" href="{{ url_for('project_detail', slug=project.slug) }}">Write-up</a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="about" class="split">
+  <div>
+    <h2>How I work</h2>
+    {% for para in about %}
+    <p>{{ para }}</p>
+    {% endfor %}
+  </div>
+  <aside class="skills">
+    <p class="mono skills-head"># skills.toml</p>
+    {% for skill in skills %}
+    <div>
+      <h3>{{ skill.group }}</h3>
+      <p>{{ skill["items"] | join(" · ") }}</p>
+    </div>
+    {% endfor %}
+  </aside>
+</section>
+
+<section id="contact" class="band">
+  <div class="band-head">
+    <h2>Contact</h2>
+    <p>If you want to talk Python, tools, or a small product — write here. It emails {{ email }}. You can also use a link below.</p>
+  </div>
+  <p class="contact-links">
+    <a class="icon-btn" href="mailto:{{ email }}" aria-label="Email" title="Email">{{ svg("mail") }}</a>
+    {% for social in socials %}
+    <a class="icon-btn" href="{{ social.href }}" aria-label="{{ social.label }}" title="{{ social.label }}" rel="noopener noreferrer" target="_blank">{{ svg(social.icon) }}</a>
+    {% endfor %}
+  </p>
+  {% if request.args.get('sent') %}
+  <p class="flash">Received. I will read it.</p>
+  {% endif %}
+  {% if contact_error %}
+  <p class="flash flash-bad">{{ contact_error }}</p>
+  {% endif %}
+  <form class="form" method="post" action="{{ url_for('contact') }}">
+    <label>
+      Name
+      <input type="text" name="name" required autocomplete="name">
+    </label>
+    <label>
+      Email
+      <input type="email" name="email" required autocomplete="email">
+    </label>
+    <label class="wide">
+      Message
+      <textarea name="message" rows="5" required></textarea>
+    </label>
+    <button class="btn" type="submit">Send</button>
+  </form>
+</section>
+{% endblock %}

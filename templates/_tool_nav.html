@@ -1,0 +1,15 @@
+<div class="grain" aria-hidden="true"></div>
+<header class="top">
+  <a class="mark" href="{{ url_for('home') }}" aria-label="Standley David home">
+    <img class="logo" src="{{ url_for('static', filename='img/logo.svg') }}" width="38" height="38" alt="">
+  </a>
+  <nav>
+    <a href="{{ url_for('home') }}#work">Work</a>
+    <a href="{{ url_for('organizer.home') }}">Organizer</a>
+    <a href="{{ url_for('jobs.home') }}">Jobs</a>
+    <a href="{{ url_for('movies.home') }}">Movies</a>
+    <a href="{{ url_for('ats.home') }}">ATS</a>
+    <a href="{{ url_for('home') }}#about">About</a>
+    <a href="{{ url_for('home') }}#contact">Contact</a>
+  </nav>
+</header>

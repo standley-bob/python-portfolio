@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ name }} — {{ role }}{% endblock %}</title>
+  <meta name="description" content="{{ tagline }}">
+  <link rel="icon" href="{{ url_for('static', filename='img/logo.svg') }}" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,500;6..72,650&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="top">
+    <a class="mark" href="{{ url_for('home') }}" aria-label="{{ name }} home">
+      <img class="logo" src="{{ url_for('static', filename='img/logo.svg') }}" width="38" height="38" alt="">
+    </a>
+    <nav>
+      <a href="{{ url_for('home') }}#work">Work</a>
+      <a href="{{ url_for('organizer.home') }}">Organizer</a>
+      <a href="{{ url_for('jobs.home') }}">Jobs</a>
+      <a href="{{ url_for('movies.home') }}">Movies</a>
+      <a href="{{ url_for('ats.home') }}">ATS</a>
+      <a href="{{ url_for('home') }}#about">About</a>
+      <a href="{{ url_for('home') }}#contact">Contact</a>
+      <a class="ghost" href="{{ url_for('api_projects') }}">/api/projects</a>
+    </nav>
+  </header>
+  <main id="content">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="foot">
+    <p>© {{ year }} {{ name }}. Python software, shown as a live Flask app.</p>
+    <p class="mono">GET /api/health → {"ok": true}</p>
+  </footer>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

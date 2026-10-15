@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ project.title }} — {{ name }}{% endblock %}
+{% block content %}
+<article class="detail">
+  <p class="kicker"><a href="{{ url_for('home') }}#work">← Work</a> · {{ project.year }} · {{ project.status }}</p>
+  <h1>{{ project.title }}</h1>
+  <p class="lede">{{ project.blurb }}</p>
+  {% if project.demo %}
+  <p class="row"><a class="btn" href="{{ url_for(project.demo) }}">Open live app</a></p>
+  {% endif %}
+  <pre class="sig"><code>{{ project.signature }}</code></pre>
+  <ul class="tags">
+    {% for item in project.stack %}
+    <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+  <div class="prose">
+    <h2>Problem</h2>
+    <p>{{ project.problem }}</p>
+    <h2>Approach</h2>
+    <p>{{ project.approach }}</p>
+    <h2>What it does</h2>
+    <ul>
+      {% for item in project.highlights %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</article>
+{% endblock %}

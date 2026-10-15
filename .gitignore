@@ -1,0 +1,13 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+.env
+data/messages.json
+data/jobs.sqlite
+software/smart_file_organizer/sandbox/
+*.log
+.DS_Store
+Thumbs.db

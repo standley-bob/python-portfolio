@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include "_tool_head.html" %}
+  <title>Job Application Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('jobs.static', filename='style.css') }}">
+</head>
+<body>
+  {% include "_tool_nav.html" %}
+  <main class="tool jobs-tool">
+    <p class="kicker"><a href="{{ url_for('home') }}#work">← Work</a> · SQLite</p>
+    <h1>Job Application Tracker</h1>
+    <p class="lede">Track roles without leaving this site’s look — same violet, a board instead of cards.</p>
+    {% if error %}<p class="flash flash-bad">{{ error }}</p>{% endif %}
+    <ul class="counts">
+      {% for label, n in counts.items() %}
+      <li><span class="status">{{ label }}</span> {{ n }}</li>
+      {% endfor %}
+    </ul>
+    <form method="post" class="form job-form">
+      <label>Company<input type="text" name="company" required></label>
+      <label>Role<input type="text" name="role" required></label>
+      <label>Status
+        <select name="status">
+          {% for item in statuses %}
+          <option value="{{ item }}" {% if item == "Applied" %}selected{% endif %}>{{ item }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>Applied on<input type="date" name="applied_on"></label>
+      <label class="wide">Posting URL<input type="url" name="url" placeholder="https://"></label>
+      <label class="wide">Notes<textarea name="notes" rows="3"></textarea></label>
+      <button class="btn" type="submit">Add application</button>
+    </form>
+    <div class="table-wrap">
+      <table class="sheet">
+        <thead><tr><th>Company</th><th>Role</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          {% for job in jobs %}
+          <tr>
+            <td>
+              <strong>{{ job.company }}</strong>
+              {% if job.url %}<div><a href="{{ job.url }}" rel="noopener noreferrer" target="_blank">Link</a></div>{% endif %}
+              <div class="fine">{{ job.applied_on }}</div>
+            </td>
+            <td>{{ job.role }}{% if job.notes %}<div class="fine">{{ job.notes }}</div>{% endif %}</td>
+            <td>
+              <form method="post" action="{{ url_for('jobs.update_status', job_id=job.id) }}">
+                <select name="status" onchange="this.form.submit()">
+                  {% for item in statuses %}
+                  <option value="{{ item }}" {% if item == job.status %}selected{% endif %}>{{ item }}</option>
+                  {% endfor %}
+                </select>
+              </form>
+            </td>
+            <td>
+              <form method="post" action="{{ url_for('jobs.remove', job_id=job.id) }}">
+                <button class="btn btn-quiet" type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </main>
+</body>
+</html>

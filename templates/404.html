@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Not found — {{ name }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <p class="kicker">404</p>
+  <h1>No module named that page.</h1>
+  <p class="lede">The route you hit is not in this app.</p>
+  <a class="btn" href="{{ url_for('home') }}">Back to home</a>
+</section>
+{% endblock %}
