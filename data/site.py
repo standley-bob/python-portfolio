@@ -91,5 +91,20 @@ organizer.apply(inbox)
     return prompt.replace("please", "please work")
 
 raise ItWorksOnMyMachineError("shipped")""",
+    """job.status = "Applied"
+job.follow_up = "tomorrow"
+# tomorrow = datetime.max""",
+    """score = ats.grade(resume, posting)
+if score < 90:
+    resume += " " + posting.keywords
+# keep only the true ones. I am watching.""",
+    """GET /api/health
+{"ok": true, "mail": "maybe", "snacks": 0}
+
+# ping stunningstanley@gmail.com anyway""",
+    """def hire(me: Standley) -> bool:
+    return me.ships() and not me.ghosts()
+
+# also I answer "Call me, I pick up\"""",
 ]
 # Drop your own mark over static/img/logo.svg when you have it.

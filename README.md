@@ -8,10 +8,13 @@ Personal site for Standley David. Flask serves the pages, three live Python tool
 | --- | --- | --- | --- |
 | Smart File Organizer | `/apps/organizer` | `software/smart_file_organizer` | `github.com/standley-bob/smart-file-organizer` |
 | Job Application Tracker | `/apps/jobs` | `software/job_application_tracker` | `github.com/standley-bob/job-application-tracker` |
-| Movie Recommendation Finder | `/apps/movies` | `software/movie_recommendation_finder` | `github.com/standley-bob/movie-recommendation-finder` |
 | ATS Analyzer & Resume Builder | `/apps/ats` | `software/ats_resume_builder` | `github.com/standley-bob/ats-resume-builder` |
 
 Each package has its own README and CLI so it can be copied into a **separate GitHub repository** after this portfolio is pushed. They stay in this repo until then so the site can run them.
+
+## InvoiceFlow (separate app)
+
+`invoiceflow/` is a standalone Flask product (online invoices). It is **not** mounted on this portfolio site. Run it on port 5001; see [`invoiceflow/README.md`](invoiceflow/README.md). Phase 1 is the public website and database setup only.
 
 ## Run locally
 
@@ -29,7 +32,6 @@ Open http://127.0.0.1:5000
 python -m pytest
 py -3 -m software.smart_file_organizer
 py -3 -m software.job_application_tracker list
-py -3 -m software.movie_recommendation_finder --like Arrival
 ```
 
 Health: http://127.0.0.1:5000/api/health  
@@ -53,4 +55,4 @@ Flask needs a Python host, not GitHub Pages.
 1. Create a GitHub repo for **this** folder (`python-portfolio`) and push.
 2. On [Render](https://render.com), New → Web Service. Build: `pip install -r requirements.txt`. Start: `gunicorn app:app --bind 0.0.0.0:$PORT`.
 
-After the portfolio is on GitHub, split the three tools into their own repos by copying each `software/...` folder. Ask in chat if you want those three GitHub repos created and pushed.
+After the portfolio is on GitHub, split the tools into their own repos by copying each `software/...` folder. Ask in chat if you want those GitHub repos created and pushed.
