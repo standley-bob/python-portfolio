@@ -8,65 +8,68 @@
 <body>
   {% include "_tool_nav.html" %}
   <main class="tool ats-tool">
-    <p class="kicker"><a href="{{ url_for('home') }}#work">← Work</a> · ATS-style</p>
-    <h1>ATS Analyzer &amp; Resume Builder</h1>
-    <p class="lede">Same colors as the rest of the site. This page is a form and a score, not a project card.</p>
-    <p class="intro">This score is from this Python tool. Keep suggested skills only if they are true.</p>
-    {% if error %}<p class="flash flash-bad">{{ error }}</p>{% endif %}
-    <form method="post" action="{{ url_for('ats.analyze') }}" enctype="multipart/form-data" class="form movie-form">
-      <label>Designation
-        <input type="text" name="designation" required value="{{ form.get('designation', '') }}" placeholder="Python developer">
-      </label>
-      <label>Company
-        <input type="text" name="company" required value="{{ form.get('company', '') }}" placeholder="Acme">
-      </label>
-      <label class="wide">Job description
-        <textarea name="jd" rows="7" required placeholder="Paste the posting">{{ form.get('jd', '') }}</textarea>
-      </label>
-      <label class="wide">Resume text
-        <textarea name="resume" rows="7" placeholder="Paste your current resume">{{ form.get('resume', '') }}</textarea>
-      </label>
-      <label class="wide">Or upload .txt / .pdf / .docx
-        <input type="file" name="resume_file" accept=".txt,.md,.pdf,.docx">
-      </label>
-      <label class="check wide">
-        <input type="checkbox" name="include_suggested" {% if form.get('include_suggested', True) %}checked{% endif %}>
-        Mirror missing job keywords into Skills (only keep what you actually know)
-      </label>
-      <button class="btn" type="submit">Analyze and build</button>
-    </form>
-    {% if result %}
-    <section class="ats-report">
-      <div class="score-pair">
-        <div>
-          <p class="mono">Original</p>
-          <p class="score">{{ result.original.total }}</p>
-        </div>
-        <div>
-          <p class="mono">Improved</p>
-          <p class="score score-good">{{ result.improved.total }}</p>
-        </div>
+    <div class="stage">
+      <div class="wide-copy">
+        <h1>ATS Analyzer &amp; Resume Builder</h1>
+        <p class="lede">Paste a posting and a resume. See the gaps, a cheeky score, then download a rebuild aimed at 90+.</p>
+        <p class="intro">This score is from this Python tool. Keep suggested skills only if they are true.</p>
       </div>
-      <p class="fine">Keyword coverage {{ result.original.coverage }}% → {{ result.improved.coverage }}%.</p>
-      <h2>Skill gap</h2>
-      <p><strong>Matched:</strong> {{ result.original.matched | join(", ") or "none yet" }}</p>
-      <p><strong>Missing vs the posting:</strong> {{ result.original.missing | join(", ") or "none" }}</p>
-      <h2>Improved resume</h2>
-      <pre class="sig resume-out">{{ result.text }}</pre>
-      <form method="post" action="{{ url_for('ats.download') }}" class="row">
-        <input type="hidden" name="designation" value="{{ form.designation }}">
-        <input type="hidden" name="company" value="{{ form.company }}">
-        <input type="hidden" name="jd" value="{{ form.jd }}">
-        <input type="hidden" name="resume" value="{{ form.resume }}">
-        {% if form.include_suggested %}
-        <input type="hidden" name="include_suggested" value="on">
-        {% endif %}
-        <button class="btn" name="fmt" value="txt" type="submit">Download .txt</button>
-        <button class="btn btn-quiet" name="fmt" value="html" type="submit">Download .html</button>
-        <button class="btn btn-quiet" name="fmt" value="docx" type="submit">Download .docx</button>
+      {% if error %}<p class="flash flash-bad wide-copy">{{ error }}</p>{% endif %}
+      <form method="post" action="{{ url_for('ats.analyze') }}" enctype="multipart/form-data" class="form tool-form">
+        <label>Designation
+          <input type="text" name="designation" required value="{{ form.get('designation', '') }}" placeholder="Python developer">
+        </label>
+        <label>Company
+          <input type="text" name="company" required value="{{ form.get('company', '') }}" placeholder="Acme">
+        </label>
+        <label class="wide">Job description
+          <textarea name="jd" rows="7" required placeholder="Paste the posting">{{ form.get('jd', '') }}</textarea>
+        </label>
+        <label class="wide">Resume text
+          <textarea name="resume" rows="7" placeholder="Paste your current resume">{{ form.get('resume', '') }}</textarea>
+        </label>
+        <label class="wide">Or upload .txt / .pdf / .docx
+          <input type="file" name="resume_file" accept=".txt,.md,.pdf,.docx">
+        </label>
+        <label class="check wide">
+          <input type="checkbox" name="include_suggested" {% if form.get('include_suggested', True) %}checked{% endif %}>
+          Mirror missing job keywords into Skills (only keep what you actually know)
+        </label>
+        <button class="btn" type="submit">Analyze and build</button>
       </form>
-    </section>
-    {% endif %}
+      {% if result %}
+      <section class="ats-report">
+        <div class="score-pair">
+          <div>
+            <p class="mono">Original</p>
+            <p class="score">{{ result.original.total }}</p>
+          </div>
+          <div>
+            <p class="mono">Improved</p>
+            <p class="score score-good">{{ result.improved.total }}</p>
+          </div>
+        </div>
+        <p class="fine">Keyword coverage {{ result.original.coverage }}% → {{ result.improved.coverage }}%.</p>
+        <h2>Skill gap</h2>
+        <p><strong>Matched:</strong> {{ result.original.matched | join(", ") or "none yet" }}</p>
+        <p><strong>Missing vs the posting:</strong> {{ result.original.missing | join(", ") or "none" }}</p>
+        <h2>Improved resume</h2>
+        <pre class="sig resume-out">{{ result.text }}</pre>
+        <form method="post" action="{{ url_for('ats.download') }}" class="row">
+          <input type="hidden" name="designation" value="{{ form.designation }}">
+          <input type="hidden" name="company" value="{{ form.company }}">
+          <input type="hidden" name="jd" value="{{ form.jd }}">
+          <input type="hidden" name="resume" value="{{ form.resume }}">
+          {% if form.include_suggested %}
+          <input type="hidden" name="include_suggested" value="on">
+          {% endif %}
+          <button class="btn" name="fmt" value="txt" type="submit">Download .txt</button>
+          <button class="btn btn-quiet" name="fmt" value="html" type="submit">Download .html</button>
+          <button class="btn btn-quiet" name="fmt" value="docx" type="submit">Download .docx</button>
+        </form>
+      </section>
+      {% endif %}
+    </div>
   </main>
 </body>
 </html>

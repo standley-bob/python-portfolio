@@ -10,4 +10,4 @@ Paste a designation, company, job description, and resume. The tool:
 
 Do not keep suggested skills unless they are true.
 
-Future GitHub repo: `ats-resume-builder`. Live on the portfolio at `/apps/ats`.
+GitHub: [github.com/standley-bob/ats-resume-builder](https://github.com/standley-bob/ats-resume-builder). Live on the portfolio at `/apps/ats`.
