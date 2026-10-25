@@ -33,14 +33,8 @@ def test_live_apps():
     assert b"Live check passed" in live.data
     assert b"holiday.jpg" in live.data
     assert client.get("/apps/jobs/").status_code == 200
-    assert client.get("/apps/movies/").status_code == 200
     assert client.get("/apps/ats/").status_code == 200
-    movies = client.post("/apps/movies/", data={"like": "Coco", "mood": "warm"})
-    assert movies.status_code == 200
-    assert b"score" in movies.data
-    search = client.post("/apps/movies/", data={"q": "Arrival"})
-    assert search.status_code == 200
-    assert b"Search" in search.data
+    assert client.get("/apps/movies/").status_code == 404
 
 
 def test_missing_project():

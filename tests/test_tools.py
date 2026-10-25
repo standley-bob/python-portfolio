@@ -1,7 +1,6 @@
 from pathlib import Path
 
 from software.job_application_tracker.store import JobStore
-from software.movie_recommendation_finder.recommend import recommend
 from software.smart_file_organizer.organizer import apply, ensure_sandbox, plan
 
 
@@ -33,10 +32,3 @@ def test_job_store_roundtrip(tmp_path: Path):
     assert rows[0].status == "Interview"
     store.delete(job.id)
     assert store.list_jobs() == []
-
-
-def test_movie_recommender_scores_overlap():
-    rows = recommend(liked_title="Arrival", genres=["sci-fi"], mood="epic")
-    titles = [row["title"] for row in rows]
-    assert "Dune" in titles or "Interstellar" in titles
-    assert "Arrival" not in titles

@@ -39,23 +39,6 @@ PROJECTS = [
         "signature": "def add(company: str, role: str, status: str = 'Applied') -> Job:",
     },
     {
-        "slug": "movie-recommendation-finder",
-        "title": "Movie Recommendation Finder",
-        "status": "live",
-        "year": "2026",
-        "stack": ["Python", "scoring", "Flask"],
-        "demo": "movies.home",
-        "blurb": "Pick a film you like, a genre, or a mood. A local catalog scores overlaps — no API key, no account.",
-        "problem": "Streaming homepages guess with ads. I wanted a tiny Python recommender I could read in one file.",
-        "approach": "A hand-picked catalog and a score: shared genres, matching mood, plus extra points if you name a film you already love.",
-        "highlights": [
-            "Works offline from software/movie_recommendation_finder/catalog.py",
-            "CLI: py -3 -m software.movie_recommendation_finder --like Arrival",
-            "Meant to split later into github.com/standley-bob/movie-recommendation-finder",
-        ],
-        "signature": "def recommend(liked_title: str = '', genres: list[str] | None = None) -> list[dict]:",
-    },
-    {
         "slug": "ats-resume-builder",
         "title": "ATS Analyzer & Resume Builder",
         "status": "live",

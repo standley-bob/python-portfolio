@@ -13,7 +13,6 @@ from data.site import ABOUT, EMAIL, HANDLE, INTRO, LOCATION, NAME, ROLE, SKILLS,
 from mailer import MailNotConfigured, mail_ready, send_contact
 from software.ats_resume_builder.web import bp as ats_bp
 from software.job_application_tracker.web import bp as jobs_bp
-from software.movie_recommendation_finder.web import bp as movies_bp
 from software.smart_file_organizer.web import bp as organizer_bp
 
 ROOT = Path(__file__).resolve().parent
@@ -25,7 +24,6 @@ app = Flask(__name__)
 app.json.compact = False
 app.register_blueprint(organizer_bp)
 app.register_blueprint(jobs_bp)
-app.register_blueprint(movies_bp)
 app.register_blueprint(ats_bp)
 
 
