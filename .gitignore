@@ -1,5 +1,10 @@
 .venv/
 venv/
+invoiceflow/.venv/
+invoiceflow/.env
+invoiceflow/instance/*.db
+invoiceflow/uploads/logos/*
+!invoiceflow/uploads/logos/.gitkeep
 __pycache__/
 *.py[cod]
 .pytest_cache/

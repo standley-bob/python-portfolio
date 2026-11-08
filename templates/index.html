@@ -1,43 +1,46 @@
 {% extends "base.html" %}
 {% from "_icons.html" import svg %}
 {% block content %}
-<section class="hero">
-  <p class="kicker">{{ location }} · {{ role }}</p>
-  <h1>{{ name }}</h1>
-  <p class="lede">{{ tagline }}</p>
-  <p class="intro">{{ intro }}</p>
-  <div class="row">
-    <a class="btn" href="#work">See the work</a>
-    <a class="btn btn-quiet" href="#contact">Say hello</a>
+<section class="hero cutout">
+  <h1 class="visually-hidden">{{ name }}</h1>
+  <p class="mega-name" aria-hidden="true">
+    <span class="mega-outline">{{ name.split()[0] }}</span>
+    <span class="mega-fill">{{ name.split()[1] }}</span>
+  </p>
+  <div class="hero-lower">
+    <div class="hero-lead">
+      <h2>{{ role }}</h2>
+      <p>{{ intro }}</p>
+      <a class="btn" href="#work">See the work</a>
+      <pre class="sig" id="hero-sig"><code>{{ hero_sig }}</code></pre>
+      <script type="application/json" id="hero-sigs">{{ hero_snippets | tojson }}</script>
+    </div>
+    <ul class="social-pills">
+      <li>
+        <a href="mailto:{{ email }}">{{ svg("mail") }} Email</a>
+      </li>
+      {% for social in socials %}
+      <li>
+        <a href="{{ social.href }}" rel="noopener noreferrer" target="_blank">{{ svg(social.icon) }} {{ social.label }}</a>
+      </li>
+      {% endfor %}
+    </ul>
   </div>
-  <pre class="sig" aria-hidden="true"><code>from coffee import one_more
-
-def build(idea: str) -> Software:
-    while idea.count("bug") > idea.count("test"):
-        one_more()
-    return Software(shipped=True)  # it ran once. ship it.</code></pre>
 </section>
 
 <section id="work" class="band">
-  <div class="band-head">
+  <div class="hangar-head">
     <h2>Selected software</h2>
-    <p>Three live Python tools. Open an app, or read the write-up. Each one is a separate package, ready to live in its own GitHub repo.</p>
+    <p>Three live Python tools. Open an app, or read the write-up.</p>
   </div>
-  <div class="grid">
+  <div class="work-list">
     {% for project in projects %}
-    <article class="card">
-      <div class="card-meta">
-        <span class="status">{{ project.status }}</span>
-        <span>{{ project.year }}</span>
+    <article class="work-row">
+      <div>
+        <p class="card-meta"><span class="status">live</span><span>{{ project.year }}</span></p>
+        <h3>{{ project.title }}</h3>
       </div>
-      <h3>{{ project.title }}</h3>
       <p>{{ project.blurb }}</p>
-      <p class="sig-line mono">{{ project.signature }}</p>
-      <ul class="tags">
-        {% for item in project.stack %}
-        <li>{{ item }}</li>
-        {% endfor %}
-      </ul>
       <div class="card-actions">
         <a class="btn" href="{{ url_for(project.demo) }}">Open app</a>
         <a class="btn btn-quiet" href="{{ url_for('project_detail', slug=project.slug) }}">Write-up</a>
@@ -66,9 +69,9 @@ def build(idea: str) -> Software:
 </section>
 
 <section id="contact" class="band">
-  <div class="band-head">
+  <div class="hangar-head">
     <h2>Contact</h2>
-    <p>If you want to talk Python, tools, or a small product — write here. It emails {{ email }}. You can also use a link below.</p>
+    <p>If you want to talk Python, tools, or a small product — write here. It emails {{ email }}.</p>
   </div>
   <p class="contact-links">
     <a class="icon-btn" href="mailto:{{ email }}" aria-label="Email" title="Email">{{ svg("mail") }}</a>
@@ -82,7 +85,7 @@ def build(idea: str) -> Software:
   {% if contact_error %}
   <p class="flash flash-bad">{{ contact_error }}</p>
   {% endif %}
-  <form class="form" method="post" action="{{ url_for('contact') }}">
+  <form class="form contact-form" method="post" action="{{ url_for('contact') }}">
     <label>
       Name
       <input type="text" name="name" required autocomplete="name">

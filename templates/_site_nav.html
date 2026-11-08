@@ -1,0 +1,25 @@
+<nav>
+  <details class="nav-drop">
+    <summary>Work <span class="nav-count">[{{ projects|length }}]</span></summary>
+    <div class="nav-drop-panel">
+      {% for project in projects %}
+      <a href="{{ url_for(project.demo) }}">{{ project.title }}</a>
+      {% endfor %}
+    </div>
+  </details>
+  <a href="{{ url_for('home') }}#about">About</a>
+  <a href="{{ url_for('home') }}#contact">Contact</a>
+  <a class="ghost" href="{{ url_for('api_projects') }}">/api/projects</a>
+</nav>
+<script>
+(() => {
+  const drop = document.querySelector(".nav-drop");
+  if (!drop) return;
+  document.addEventListener("click", (event) => {
+    if (!drop.contains(event.target)) drop.removeAttribute("open");
+  });
+  drop.addEventListener("toggle", () => {
+    drop.querySelector("summary")?.setAttribute("aria-expanded", drop.open ? "true" : "false");
+  });
+})();
+</script>
