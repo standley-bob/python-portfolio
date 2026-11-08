@@ -1,6 +1,6 @@
 <nav>
   <details class="nav-drop">
-    <summary>Work</summary>
+    <summary>Work <span class="nav-count">[{{ projects|length }}]</span></summary>
     <div class="nav-drop-panel">
       {% for project in projects %}
       <a href="{{ url_for(project.demo) }}">{{ project.title }}</a>

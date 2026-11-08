@@ -18,6 +18,8 @@ Each package has its own README and CLI so it can be copied into a **separate Gi
 
 ## Run locally
 
+Full Command Prompt and VS Code steps: [`HOW_TO_RUN.md`](HOW_TO_RUN.md).
+
 ```powershell
 cd C:\Users\Bob\python-portfolio
 py -3 -m venv .venv

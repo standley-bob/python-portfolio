@@ -1,0 +1,25 @@
+---
+description: Keep HOW_TO_RUN.md accurate whenever portfolio launch or setup changes
+alwaysApply: true
+---
+
+# Portfolio how-to-run
+
+Whenever you change how **python-portfolio** is started, installed, tested, or which port/URLs it uses, update `HOW_TO_RUN.md` in the same change.
+
+That file is the user’s launch guide (Command Prompt, PowerShell, and Visual Studio Code). Do not leave it stale. Do not remove it. Prefer editing it over putting launch-only instructions only in chat.
+
+Update it when any of these change:
+
+- `app.py` host/port or start command
+- virtualenv or `requirements.txt` install steps
+- `.env` / environment variable names needed to run locally
+- live tool URLs under `/apps/` (add, remove, or rename a tool)
+- `/api/health` or `/api/projects`
+- first-time vs every-day commands
+- VS Code interpreter / terminal steps
+- how tests are run (`python -m pytest tests`)
+
+Keep Command Prompt (`activate.bat`) and PowerShell/VS Code (`Activate.ps1`) commands in that file.
+
+InvoiceFlow launch docs stay in `invoiceflow/HOW_TO_RUN.md` (port 5001). Do not mix those commands into the portfolio file unless you also note they are a separate app.

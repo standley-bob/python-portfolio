@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% block title %}{{ project.title }} — {{ name }}{% endblock %}
 {% block content %}
-<article class="detail">
-  <p class="kicker"><a href="{{ url_for('home') }}#work">← Work</a> · {{ project.year }} · {{ project.status }}</p>
+<article class="tool detail">
   <h1>{{ project.title }}</h1>
   <p class="lede">{{ project.blurb }}</p>
   {% if project.demo %}
